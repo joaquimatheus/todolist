@@ -1,23 +1,43 @@
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
-require('../../dotenv');
+const { routes } = require("./routes");
 
-const http = require('http');
+require("../../dotenv");
+
+const http = require("http");
 
 const server = http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origins', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    res.setHeader("Access-Control-Allow-Origins", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    if (req.method === 'OPTIONS') { return res.end(); }
+    if (req.method === "OPTIONS") {
+        return res.end();
+    }
 
-    res.end()
+
+    const route = routes.find(
+        (r) => (req.url === r.url && req.method === r.method)
+    );
+
+    if (!route) {
+        res.writeHead(404, "application/json");
+        res.end(JSON.stringify({ error: "Not found" }));
+        return;
+    }
+
+    if (route) { return route.handler(req, res); }
+
+    res.end();
 });
 
-server.listen({
-    host: 'localhost',
-    port: process.env.HTTP_SERVER_PORT
-}, () =>  {
-    console.log(`server is running =) in ${process.env.API_PORT} `)
-})
+server.listen(
+    {
+        host: "localhost",
+        port: process.env.API_PORT,
+    },
+    () => {
+        console.log(`server is running =) in ${process.env.API_PORT} `);
+    }
+);
