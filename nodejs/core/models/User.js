@@ -1,0 +1,59 @@
+const bcrypt = require('bcrypt');
+
+class UserModel {
+    constructor(dB) {
+        this.db = dB;
+    }
+
+    async createUserAndAccount(name, email, password) {
+        const hashedPassword = await bcrypt.hash(password, 7);
+
+        const userRows = await this.db.knex('users').insert({
+            name,
+            email,
+            password: hashedPassword
+        }).returning('*');
+
+        const [ user ] = userRows;
+        
+        const accountRows = await this.db.knex('accounts').insert({
+            created_by_user_id: user.id, name
+        }).returning('*');
+
+        const [ account ] = accountRows;
+        await this.db.knex('users_in_accounts').insert({
+            account_id: account.id,
+            user_id: user.id,
+            role: 'admin'
+        });
+
+        const userInAccounts = this.db.knex('users_in_accounts').where({
+            account_id: account.id,
+            user_id: user.id,
+            role: 'admin'
+        }).first();
+
+        return { user, account };
+    }
+
+    async getUserByEmail(email) {
+        const user = await this.db.knex('users').where({ email }).first();
+        if (!user) { throw new Error(`User ${email} not found!`); }
+
+        return user;
+    }
+
+    async login(email, password) {
+        const user = await this.getUserByEmail(email);
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if(!isValidPassword) {
+            throw new Error(`Invalid password for: ${email}`);
+        }
+
+        return user;
+    }
+    
+}
+
+module.exports = UserModel
