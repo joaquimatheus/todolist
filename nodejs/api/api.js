@@ -7,18 +7,20 @@ require("../../dotenv");
 
 const http = require("http");
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+    );
 
     if (req.method === "OPTIONS") {
         return res.end();
     }
 
-
     const route = routes.find(
-        (r) => (req.url === r.url && req.method === r.method)
+        (r) => req.url === r.url && req.method === r.method
     );
 
     if (!route) {
@@ -30,28 +32,31 @@ const server = http.createServer((req, res) => {
     try {
         if (route.middlewares) {
             await new Promise((resolve, reject) => {
-                const middlewares = [ ...route.middlewares ];
+                const middlewares = [...route.middlewares];
 
                 function iterator(err) {
-                    if (err) { return reject(err); }
+                    if (err) {
+                        return reject(err);
+                    }
 
-                    middleware = middleware.shift();
-                    if(middleware) {
+                    middleware = middlewares.shift();
+                    if (middleware) {
                         return middleware(req, res, iterator);
                     }
 
                     resolve();
                 }
+
                 iterator();
-            })
+            });
         }
 
-        await route.handler(req, res)
+        await route.handler(req, res);
     } catch (ex) {
         console.log(ex);
 
         res.writeHead(500, 'application/json');
-        res.end(JSON.stringify({ error: ex.message }));
+        res.end(JSON.stringify({ error: ex.message }))
     }
 });
 
