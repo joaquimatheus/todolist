@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Sign up</title>
+        <meta name="description" content="the signup page" />
+        <script src="/js/signup.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Create account</h1>
+        </header>
+
+        <main>
+            <form method="POST">
+                <section>
+                    <label>Username:</label>
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="username"
+                        name="username"
+                    />
+                </section>
+
+                <section>
+                    <label>Email:</label>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="email"
+                        name="email"
+                    />
+                </section>
+
+                <section>
+                    <label>Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                    />
+                </section>
+                <section>
+                    <button type="submit">Sign up</button>
+                    <hr />
+                    <a href="/login">you have an account?</a>
+                    <hr />
+                </section>
+            </form>
+        </main>
+    </body>
+</html>
