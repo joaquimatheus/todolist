@@ -27,9 +27,32 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    if (route) { return route.handler(req, res); }
+    try {
+        if (route.middlewares) {
+            await new Promise((resolve, reject) => {
+                const middlewares = [ ...route.middlewares ];
 
-    res.end();
+                function iterator(err) {
+                    if (err) { return reject(err); }
+
+                    middleware = middleware.shift();
+                    if(middleware) {
+                        return middleware(req, res, iterator);
+                    }
+
+                    resolve();
+                }
+                iterator();
+            })
+        }
+
+        await route.handler(req, res)
+    } catch (ex) {
+        console.log(ex);
+
+        res.writeHead(500, 'application/json');
+        res.end(JSON.stringify({ error: ex.message }));
+    }
 });
 
 server.listen(

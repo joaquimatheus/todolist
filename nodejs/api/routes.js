@@ -120,14 +120,26 @@ const routes = [
             const { email, password } = await jsonParse(req);
             const userModel = new UserModel(new Database());
 
-            const { user, account } = await userModel.login(email, password);;
+            const user = await userModel.login(email, password);
+            const token = getJwtTokenByUser(user);
 
             console.log(`Logged - ${email}`);
 
             res.writeHead(200, 'application/json');
-            res.end(JSON.stringify({ ok: true }));
+            res.end(JSON.stringify({ token, ok: true }));
         }
     },
+    {
+        url: '/tasks',
+        method: 'GET',
+        middlewares: [
+            validateJwtToken
+        ],
+        handler: (res, res) => {
+            res.writeHead(200, 'application/json');
+            res.end(JSON.stringify({ok: true}));
+        }
+    }
 ];
 
 module.exports = { routes };
