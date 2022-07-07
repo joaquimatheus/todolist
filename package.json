@@ -7,6 +7,8 @@
     "pg": "^8.7.3"
   },
   "scripts": {
-      "test": "mocha"
+      "test": "mocha",
+      "api": "node nodejs/api/api.js",
+      "server": "node ui/server.js"
   }
 }
