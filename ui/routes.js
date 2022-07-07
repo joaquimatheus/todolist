@@ -9,6 +9,7 @@ const htmls = {
     index: getUiFiles("index.html"),
     signup: getUiFiles("signup.html"),
     login: getUiFiles("login.html"),
+    tasks: getUiFiles('tasks.html'),
 };
 
 const js = {
@@ -24,6 +25,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'text/html');
             res.end(htmls.index);
+        }
+    },
+    {
+        url: '/tasks',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.tasks);
         }
     },
     {
