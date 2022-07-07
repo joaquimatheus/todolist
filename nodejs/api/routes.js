@@ -21,6 +21,51 @@ async function jsonParse(req) {
     });
 }
 
+function urlEncodeBase64(str) {
+    return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
+function toBase64(str) {
+    return Buffor.from(str).toString('base64');
+}
+
+function toBase64UrlEncoded(str) {
+    return urlEncodeBase64(toBase64(str));
+}
+
+function getHS256(text, secret) {
+    const hmac = crypto.createHmac('sha256', secret);
+    return hmac.update(text).digest('base64');
+}
+
+function validateJwtToken(req, res, next) {
+    const { authorization } = req.headers;
+    const token = (authorization || '').replace('Bearer ', '')
+
+    if (!token) {
+        res.writeHead(403, 'application/json');
+        res.end(JSON.stringify({ forbidden: true }));
+        return;
+    }
+
+    const [ header, payload, signature ] = token.split('.');
+    const checkSignature = urlEncodeBase64(getHS256(
+        `${header}.${payload}`,
+        process.env.JWT_SECRET
+    ));
+
+    if (checkSignature !== signature) {
+        res.writeHead(401, 'application/json');
+        res.end(JSON.stringify({
+            invalidToken: true,
+            unauthorized: true
+        }));
+        return;
+    }
+
+    next();
+}
+
 const routes = [
     {
         url: "/signup",
