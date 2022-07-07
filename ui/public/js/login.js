@@ -19,7 +19,8 @@ window.onload = function () {
                 body: JSON.stringify(formData),
             })
             .then((res) => {
-                console.log(res);
+                console.log(res)
+                location.href = '/tasks';
             })
             .catch((res) => {
                 console.error(res);
