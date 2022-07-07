@@ -39,6 +39,19 @@ function getHS256(text, secret) {
     return hmac.update(text).digest('base64');
 }
 
+function getJwtTokenByUser(user) {
+    const header = { typ: 'JWT', alg: 'HS256' };
+    const payload = { userId: user.id };
+
+    const headerString = toBase64UrlEncoded(JSON.stringify(header));
+    const payloadString = toBase64UrlEncoded(JSON.stringify(payload));
+
+    const token = `${headerString}.${payloadString}`;
+    const signature = urlEncodeBase64(getHS256(token, process.env.JWT_SECRET));
+
+    return `${token}.${signature}`;
+}
+
 function validateJwtToken(req, res, next) {
     const { authorization } = req.headers;
     const token = (authorization || '').replace('Bearer ', '')
