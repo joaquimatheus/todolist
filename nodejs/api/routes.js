@@ -1,5 +1,6 @@
 const Database = require("../core/models/Database");
 const UserModel = require("../core/models/User");
+const crypto = require('crypto');
 
 async function jsonParse(req) {
     return new Promise((resolve, reject) => {
