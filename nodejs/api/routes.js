@@ -27,7 +27,7 @@ function urlEncodeBase64(str) {
 }
 
 function toBase64(str) {
-    return Buffor.from(str).toString('base64');
+    return Buffer.from(str).toString('base64');
 }
 
 function toBase64UrlEncoded(str) {
@@ -132,10 +132,8 @@ const routes = [
     {
         url: '/tasks',
         method: 'GET',
-        middlewares: [
-            validateJwtToken
-        ],
-        handler: (res, res) => {
+        middlewares: [ validateJwtToken ],
+        handler: async (req, res) => {
             res.writeHead(200, 'application/json');
             res.end(JSON.stringify({ok: true}));
         }
