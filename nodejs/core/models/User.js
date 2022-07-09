@@ -1,4 +1,14 @@
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+
+async function getRandomToken() {
+    return new Promise((resolve, reject) => {
+        crypto.randomBytes(64, (err, buff) => {
+            if (err) { return reject(err); }
+            resolve(buff.toString('hex'))
+        })
+    })
+}
 
 class UserModel {
     constructor(dB) {
@@ -52,6 +62,34 @@ class UserModel {
         }
 
         return user;
+    }
+
+    async createNewLoginToken(email) {
+        const user = await this.getUserByEmail(email);
+        const loginToken = await getRandomToken();
+
+        return this.db.knex('users').update({
+            login_token: loginToken
+        }).where({ id: user.id }).returning('*');
+    }
+
+    async validateLoginToken(loginToken) {
+        const user = await this.db.knex('users').where({
+            login_token: loginToken
+        }).first();
+
+        if(!user) { throw new Error('Invalid token') };
+    }
+
+    async setNewPasswordByLoginToken(loginToken, password) {
+        const hashedPassword = await bcrypt.hash(password, 7);
+
+        return this.db.knex('users').update({
+            password: hashedPassword,
+            login_token: null
+        }).where({
+            login_token: loginToken
+        });
     }
     
 }
