@@ -1,6 +1,6 @@
 const Database = require("../core/models/Database");
 const UserModel = require("../core/models/User");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 async function jsonParse(req) {
     return new Promise((resolve, reject) => {
@@ -23,11 +23,11 @@ async function jsonParse(req) {
 }
 
 function urlEncodeBase64(str) {
-    return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    return str.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
 function toBase64(str) {
-    return Buffer.from(str).toString('base64');
+    return Buffer.from(str).toString("base64");
 }
 
 function toBase64UrlEncoded(str) {
@@ -35,12 +35,12 @@ function toBase64UrlEncoded(str) {
 }
 
 function getHS256(text, secret) {
-    const hmac = crypto.createHmac('sha256', secret);
-    return hmac.update(text).digest('base64');
+    const hmac = crypto.createHmac("sha256", secret);
+    return hmac.update(text).digest("base64");
 }
 
 function getJwtTokenByUser(user) {
-    const header = { typ: 'JWT', alg: 'HS256' };
+    const header = { typ: "JWT", alg: "HS256" };
     const payload = { userId: user.id };
 
     const headerString = toBase64UrlEncoded(JSON.stringify(header));
@@ -54,26 +54,27 @@ function getJwtTokenByUser(user) {
 
 function validateJwtToken(req, res, next) {
     const { authorization } = req.headers;
-    const token = (authorization || '').replace('Bearer ', '')
+    const token = (authorization || "").replace("Bearer ", "");
 
     if (!token) {
-        res.writeHead(403, 'application/json');
+        res.writeHead(403, "application/json");
         res.end(JSON.stringify({ forbidden: true }));
         return;
     }
 
-    const [ header, payload, signature ] = token.split('.');
-    const checkSignature = urlEncodeBase64(getHS256(
-        `${header}.${payload}`,
-        process.env.JWT_SECRET
-    ));
+    const [header, payload, signature] = token.split(".");
+    const checkSignature = urlEncodeBase64(
+        getHS256(`${header}.${payload}`, process.env.JWT_SECRET)
+    );
 
     if (checkSignature !== signature) {
-        res.writeHead(401, 'application/json');
-        res.end(JSON.stringify({
-            invalidToken: true,
-            unauthorized: true
-        }));
+        res.writeHead(401, "application/json");
+        res.end(
+            JSON.stringify({
+                invalidToken: true,
+                unauthorized: true,
+            })
+        );
         return;
     }
 
@@ -84,7 +85,7 @@ const routes = [
     {
         url: "/signup",
         method: "POST",
-        handler: async(req, res) => {
+        handler: async (req, res) => {
             try {
                 const { name, email, password } = await jsonParse(req);
                 const userModel = new UserModel(new Database());
@@ -115,8 +116,8 @@ const routes = [
     },
     {
         url: "/login",
-        method: 'POST',
-        handler: async(req, res) => {
+        method: "POST",
+        handler: async (req, res) => {
             const { email, password } = await jsonParse(req);
             const userModel = new UserModel(new Database());
 
@@ -125,19 +126,65 @@ const routes = [
 
             console.log(`Logged - ${email}`);
 
-            res.writeHead(200, 'application/json');
+            res.writeHead(200, "application/json");
             res.end(JSON.stringify({ token, ok: true }));
-        }
+        },
     },
     {
-        url: '/tasks',
-        method: 'GET',
-        middlewares: [ validateJwtToken ],
+        url: "/tasks",
+        method: "GET",
+        middlewares: [validateJwtToken],
         handler: async (req, res) => {
+            res.writeHead(200, "application/json");
+            res.end(JSON.stringify({ ok: true }));
+        },
+    },
+    {
+        url: "/forget-password",
+        method: "POST",
+        handler: async (req, res) => {
+            const { email } = await jsonParse(req);
+            
+            console.log(email)
+
+            const userModel = new UserModel(new Database());
+
+            user = await userModel.createNewLoginToken(email);
+
+            console.log(user);
+
+            res.writeHead(200, "application/json");
+            res.end(JSON.stringify({ ok: true }));
+        },
+    },
+    {
+        url: "/login-token",
+        method: "GET",
+        handler: async (req, res) => {
+            const userModel = new UserModel(new Database());
+            await userModel.validateLoginToken(req.query.token);
+
+            console.log('LoginToken validated!')
+
+            res.writeHead(200);
+            res.end(JSON.stringify({ ok: true }));
+        },
+    },
+    {
+        url: "/set-new-password",
+        method: "POST",
+        handler: async (req, res) => {
+            const userModel = new UserModel(new Database());
+            const { token, password } = await jsonParse(req);
+
+            console.log(password, token)
+
+            await userModel.setNewPasswordByLoginToken(token, password);
+
             res.writeHead(200, 'application/json');
-            res.end(JSON.stringify({ok: true}));
-        }
-    }
+            res.end(JSON.stringify({ ok: true }));
+        },
+    },
 ];
 
 module.exports = { routes };
