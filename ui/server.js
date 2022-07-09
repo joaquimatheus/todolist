@@ -1,7 +1,9 @@
 require("../dotenv");
-const http = require("http");
 
+const http = require("http");
 const routes = require("./routes");
+const urlModule = require('url');
+const queryString = require('querystring')
 
 const server = http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -10,8 +12,13 @@ const server = http.createServer((req, res) => {
 
     if (req.method === "OPTIONS") { return res.end();}
 
+    const { pathname, search } = urlModule.parse(req.url);
+    if (search) {
+        req.query = queryString.parse(search.slice(1));
+    }
+
     const route = routes.find(
-        (r) => req.url === r.url && req.method === r.method
+        (r) => pathname === r.url && req.method === r.method
     );
 
     if (route) { return route.handler(req, res) }

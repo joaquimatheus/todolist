@@ -10,11 +10,15 @@ const htmls = {
     signup: getUiFiles("signup.html"),
     login: getUiFiles("login.html"),
     tasks: getUiFiles('tasks.html'),
+    forget: getUiFiles('forget.html'),
+    recover: getUiFiles('recover.html')
 };
 
 const js = {
     signup: getUiFiles('js/signup.js'),
-    login: getUiFiles('js/login.js')
+    login: getUiFiles('js/login.js'),
+    forget: getUiFiles('js/forget.js'),
+    recover: getUiFiles('js/recover.js')
 }
 
 const routes = [
@@ -51,6 +55,22 @@ const routes = [
             res.end(htmls.login);
         },
     },
+    {
+        url: '/forget',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.forget);
+        }
+    },
+    {
+        url: '/recover',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.recover);
+        }
+    },
     // JS
     {
         url: "/js/signup.js",
@@ -68,6 +88,22 @@ const routes = [
             res.end(js.login);
         }
     },
+    {
+        url: '/js/forget.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.forget);
+        }
+    },
+    {
+        url: '/js/recover.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.recover);
+        }
+    }
 ];
 
 module.exports = routes;
