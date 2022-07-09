@@ -1,10 +1,10 @@
-const path = require("path");
-const fs = require("fs");
-
-const { routes } = require("./routes");
-
 require("../../dotenv");
 
+const fs = require("fs");
+const path = require("path");
+const { routes } = require("./routes");
+const urlModule = require('url');
+const queryString = require('querystring');
 const http = require("http");
 
 const server = http.createServer(async (req, res) => {
@@ -19,8 +19,13 @@ const server = http.createServer(async (req, res) => {
         return res.end();
     }
 
+    const { pathname, search } = urlModule.parse(req.url);
+    if (search) {
+        req.query = queryString.parse(search.slice(1));
+    }
+
     const route = routes.find(
-        (r) => req.url === r.url && req.method === r.method
+        (r) => pathname === r.url && req.method === r.method
     );
 
     if (!route) {
