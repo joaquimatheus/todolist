@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Recover Password</title>
+        <meta name="description" content="recover pwd page" />
+        <script src="/js/recover.js"></script>
+    </head>
+    <body>
+        <header><h1>Recover your Password</h1></header>
+        <p>Please redefine your password here. ;)</p>
+
+        <main>
+            <form>
+                <section>
+                    <label>Your new password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        maxlength="256"
+                        autocomplete="new-password"
+                    />
+                </section>
+
+                <section>
+                    <label>Confirm your new password</label>
+                    <input
+                        id="new-password"
+                        type="password"
+                        name="confirmPassword"
+                        maxlength="256"
+                        autocomplete="new-password"
+                    />
+                </section>
+
+                <button type="submit">to save new password</button>
+            </form>
+            <p>to back to<a href="/login">login page</a></p>
+        </main>
+    </body>
+</html>
