@@ -1,6 +1,9 @@
 const Database = require("../core/models/Database");
 const UserModel = require("../core/models/User");
 const crypto = require("crypto");
+const Logger = require('../../shared/logger');
+
+const logger = new Logger();
 
 async function jsonParse(req) {
     return new Promise((resolve, reject) => {
@@ -106,7 +109,7 @@ const routes = [
                     })
                 );
             } catch (ex) {
-                console.log(ex);
+                logger.error(ex);
 
                 res.writeHead(201, "application/json");
                 res.end("Invalid user data, please try again");
@@ -124,7 +127,7 @@ const routes = [
             const user = await userModel.login(email, password);
             const token = getJwtTokenByUser(user);
 
-            console.log(`Logged - ${email}`);
+            logger.info(`Logged - ${email}`);
 
             res.writeHead(200, "application/json");
             res.end(JSON.stringify({ token, ok: true }));
@@ -145,8 +148,6 @@ const routes = [
         handler: async (req, res) => {
             const { email } = await jsonParse(req);
             
-            console.log(email)
-
             const userModel = new UserModel(new Database());
 
             user = await userModel.createNewLoginToken(email);
@@ -164,8 +165,6 @@ const routes = [
             const userModel = new UserModel(new Database());
             await userModel.validateLoginToken(req.query.token);
 
-            console.log('LoginToken validated!')
-
             res.writeHead(200);
             res.end(JSON.stringify({ ok: true }));
         },
@@ -176,8 +175,6 @@ const routes = [
         handler: async (req, res) => {
             const userModel = new UserModel(new Database());
             const { token, password } = await jsonParse(req);
-
-            console.log(password, token)
 
             await userModel.setNewPasswordByLoginToken(token, password);
 
