@@ -18,17 +18,7 @@ const server = http.createServer(async (req, res) => {
     );
 
     const ip = req.connection.remoteAddress;
-    logger.info(`${ip} - Start request: ${req.method}: ${req.url}`)
-
-    const started = new Date();
-    res.on('finish', () => {
-        const took = new Date() - started;
-
-        logger.info(
-            `${ip} - Request done: ${req.method} ` +
-            `${req.url} ${res.statusCode} ${took}ms`
-        );
-    });
+    logger.bindRoute(ip, req, res)
 
     if (req.method === "OPTIONS") {
         return res.end();
@@ -86,6 +76,6 @@ server.listen(
         port: process.env.API_PORT,
     },
     () => {
-        logger.info(`server is running =) in ${process.env.API_PORT} `);
+        logger.info(`API is running =) in ${process.env.API_PORT} `);
     }
 );
