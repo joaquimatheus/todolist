@@ -33,12 +33,12 @@ class Logger {
             params.push(util.inspect(context));
         }
 
-        params.push('\n');
+        params.push("\n");
         process.stdout.write(params.join(""));
     }
 
-    errorFn(error, context) {
-        let { message, stack } = formatError(error);
+    error(error, context) {
+        let { message, stack } = this.formatError(error);
 
         message = labelError + ts() + message;
         const params = [message, stack];
@@ -47,49 +47,23 @@ class Logger {
             params.push(util.inspect(context));
         }
 
-        params.push("");
+        params.push("\n");
         process.stderr.write(params.join(""));
     }
-}
 
-function formatError(error) {
-    let errorData = {};
+    bindRoute(ip, req, res) {
+        this.info(`${ip} - Start request: ${req.method}: ${req.url}`);
 
-    if (error instanceof Error) {
-        errorData = {
-            message: error.message,
-            stack: error.stack,
-        };
-    } else {
-        const message = output(error);
-        errorData = { message, stack: new Error(message).stack };
+        const started = new Date();
+        res.on("finish", () => {
+            const took = new Date() - started;
+
+            this.info(
+                `${ip} - Request done: ${req.method}: ` +
+                `${req.url} ${res.statusCode} ${took}ms`
+            );
+        });
     }
-
-    return errorData;
-}
-
-function info(msg, context) {
-    const params = [labelInfo + ts() + output(msg)];
-
-    if (context) {
-        params.push(util.inspect(context));
-    }
-
-    process.stdout.write(params.join(""));
-}
-
-function errorFn(error, context) {
-    let { message, stack } = formatError(error);
-
-    message = labelError + ts() + message;
-    const params = [message, stack];
-
-    if (context) {
-        params.push(util.inspect(context));
-    }
-
-    params.push("\n");
-    process.stderr.write(params.join(""));
 }
 
 module.exports = Logger;
