@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+.nav-bar {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.nav-bar li {
+    float: left;
+}
+
+.nav-bar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-bar a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #04AA6d;
+}
+
+ul .signup {
+    float: right;
+}
+
+.header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+
+.column h2 {
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+}
+
+.column p {
+    font-family: monospace;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 20px 20px;
+}
