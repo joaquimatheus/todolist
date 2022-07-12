@@ -3,42 +3,45 @@
     <head>
         <title>Home</title>
         <meta charset="utf-8" />
+        <link href="/css/home.css" rel="stylesheet" />
     </head>
     <body>
         <main>
             <header>
-                <ul>
+                <ul class="nav-bar">
                     <li>
                         <a href="/login">Login</a>
                     </li>
-                    <li>
+                    <li class="signup">
                         <a href="/signup">Sign up</a>
                     </li>
                 </ul>
             </header>
 
-            <section>
+            <section class="header">
                 <h5>what this app do</h5>
                 <h1>you can create a todo list to be more productive</h1>
             </section>
 
             <section>
-                <div>
-                    <h2>Productivity</h2>
-                    <p>
-                        Improve your productivity with this handy task manager.
-                        If you never seem to have enough time to complete your
-                        tasks, maybe you need a task manager like this
-                        Application helo!
-                    </p>
-                </div>
-                <div>
-                    <h2>Create</h2>
-                    <p>Create your tasks and manage it</p>
-                </div>
-                <div>
-                    <h2>Share</h2>
-                    <p>Share Your Tasks with your teammates</p>
+                <div class="row">
+                    <div class="column">
+                        <h2>Productivity</h2>
+                        <p>
+                            Improve your productivity with this handy task
+                            manager. If you never seem to have enough time to
+                            complete your tasks, maybe you need a task manager
+                            like this Application helo!
+                        </p>
+                    </div>
+                    <div class="column">
+                        <h2>Create</h2>
+                        <p>Create your tasks and manage it</p>
+                    </div>
+                    <div class="column">
+                        <h2>Share</h2>
+                        <p>Share Your Tasks with your teammates</p>
+                    </div>
                 </div>
             </section>
         </main>
