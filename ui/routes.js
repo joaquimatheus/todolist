@@ -18,7 +18,8 @@ const js = {
     signup: getUiFiles('js/signup.js'),
     login: getUiFiles('js/login.js'),
     forget: getUiFiles('js/forget.js'),
-    recover: getUiFiles('js/recover.js')
+    recover: getUiFiles('js/recover.js'),
+    tasks: getUiFiles('js/tasks.js'),
 }
 
 const css = {
@@ -108,6 +109,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'application/javascript');
             res.end(js.recover);
+        }
+    },
+    {
+        url: '/js/tasks.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.tasks);
         }
     },
     // CSS
