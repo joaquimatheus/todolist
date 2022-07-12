@@ -3,28 +3,96 @@
     <head>
         <meta name="description" content="The tasks page" />
         <meta charset="utf-8" />
-        <link href="/css/tasks.css" rel="stylesheet" />
         <title>Tasks</title>
+        <link href="/css/tasks.css" rel="stylesheet" />
     </head>
     <body>
         <main>
+            <header>
+                <h1>todolist_<br/><span>-do & done_</span></h1>
+            </header>
             <section>
                 <div class="add-task-container">
                     <input
                         class="tasks-input"
+                        id="taskText"
                         type="text"
-                        placeholder="what are you working on?"
+                        placeholder="New Task..."
                     />
-                    <button class="add-button-task">+</button>
+                    <button id='add' class="button add-button-task">+</button>
                 </div>
-                <ul>
-                    <li>
-                        <input type="checkbox" />
-                        <label>
-                            <span>Buy something</span>
-                        </label>
-                    </li>
-                </ul>
+
+                <div class="main-container">
+                    <ul class="columns">
+                        <li class="column to-do-column">
+                            <div class="column-header">
+                                <h4>To Do</h4>
+                            </div>
+                            <ul class="task-list" id="to-do">
+                                <li class="task">
+                                    <p>Analysis</p>
+                                </li>
+                                <li class="task">
+                                    <p>Coding</p>
+                                </li>
+                                <li class="task">
+                                    <p>Card Sorting</p>
+                                </li>
+                                <li class="task">
+                                    <p>Measure</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="column doing-column">
+                            <div class="column-header">
+                                <h4>Doing</h4>
+                            </div>
+                            <ul class="task-list" id="doing">
+                                <li class="task">
+                                    <p>Hypothesis</p>
+                                </li>
+                                <li class="task">
+                                    <p>User Testing</p>
+                                </li>
+                                <li class="task">
+                                    <p>Prototype</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="column done-column">
+                            <div class="column-header">
+                                <h4>Done</h4>
+                            </div>
+                            <ul class="task-list" id="done">
+                                <li class="task">
+                                    <p>Ideation</p>
+                                </li>
+                                <li class="task">
+                                    <p>Sketches</p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="column trash-column">
+                            <div class="column-header">
+                                <h4>Trash</h4>
+                            </div>
+                            <ul class="task-list" id="trash">
+                                <li class="task">
+                                    <p>Interviews</p>
+                                </li>
+                                <li class="task">
+                                    <p>Research</p>
+                                </li>
+                            </ul>
+                            <div class="column-button">
+                                <button class="button delete-button">Delete</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </main>
     </body>

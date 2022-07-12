@@ -1,68 +1,201 @@
-*,
-*:before,
-*:after {
-    padding: 0;
-    margin: 0;
+:root {
+    font-size: calc(0.5vw + 1vh)
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #51b67f;
-    background: linear-gradient(90deg, #51b67f 0%, #2f7c52 70%)
+    min-width: 420px;
 }
 
-main {
-    background: #1e1e1e;
-    height: 500px;
-    width: 400px;
-    padding-top: 30px;
-    border: solid 2px black;
-    border-radius: 20px;
+h1,
+h4 {
+    font-family: "Arimo", sans-serif;
+    line-height: 1.3;
 }
 
-ul, .add-task-container {
-    display: flex;
-    align-items: center;
-    justify-content: center,
-}
-
-.tasks-input {
-    font-size: 1.2em;
-    padding: 0.35em;
-    border: 2px solid black;
-    border-radius: 3px;
-}
-
-.add-button-task {
-    border: none;
-    margin-left: 10px;
-    font-size: 1.8em;
-    width: 4vw;
-    background-color: #42b883;
-}
-
-ul {
-    margin-top: 20px;
-    list-style-type: none;
-}
-
-li {
-    font-size: 1.3rem;
-    padding: 10px;
-    color: white;
-    border-bottom: solid 2px yellow;
-}
-
-input[type="checkbox"] {
-    height: 20px;
-    width: 20px;
-    margin-right: 10px;
+header h1 {
+    font-size: 2.4rem;
+    margin: 4rem auto;
 }
 
 span {
-    font-size: 1.2em;
+    font-size: 3rem;
+}
+
+p {
+    font-family: "Roboto Slab", serif
+}
+
+a,
+a:link,
+a:active,
+a:visited {
+    color: #0066aa;
+    text-decoration: none;
+    border-bottom: #000013 0.16rem solid;
+}
+
+a:hover {
+    color: #000013;
+    border-bottom: #0066aa 0.16rem solid;
+}
+
+header,
+footer {
+    width: 40rem;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.add-task-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 20rem;
+    height: 5.3rem;
+    margin: auto;
+    background: #a8a8a8;
+    border: #000013 0.2rem solid;
+    border-radius: 0.2rem;
+    padding: 0.4rem;
+}
+
+.main-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.columns {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin: 1.6rem auto;
+}
+
+.column {
+    width: 8.4rem;
+    margin: 0 0.6rem;
+    background: #a8a8a8;
+    border: #000013 0.2rem solid;
+    border-radius: 0.2rem;
+}
+
+.column-header {
+    padding: 0.1rem;
+    border-bottom: #000013 0.2rem solid;
+}
+
+.column-header h4 {
+    text-align: center;
+}
+
+.to-do-column .column-header {
+    background: #ff872f;
+}
+
+.doing-column .column-header {
+    background: #13a4d9;
+}
+
+.done-column .column-header {
+    background: #15d072;
+}
+
+.trash-column .column-header {
+    background: #ff4444;
+}
+
+.task-list {
+    min-height: 3rem;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.column-button {
+    text-align: center;
+    padding: 0.1rem;
+}
+
+.button {
+    font-family: "Arimo", sans-serif;
+    font-weight: 700;
+    border: #000013 0.14rem solid;
+    border-radius: 0.2rem;
+    color: #000013;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #ff4444;
+    margin: 0.1rem auto 0.6rem auto;
+}
+
+.deleete-button:hover {
+    background-color: #fa7070;
+}
+
+.add-button-task {
+    background-color: #ffcb1e;
+    padding: 0 1rem;
+    height: 2.8rem;
+    width: 10rem;
+    margin-top: 0.6rem;
+}
+
+.add-button:hover {
+    background-color: #ffdd6e;
+}
+
+.task {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    vertical-align: center;
+    list-style-type: none;
+    background: #fff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin: 0.4rem;
+    height: 4rem;
+    border: #000013 0.15rem solid;
+    border-radius: 0.2rem;
+    cursor: move;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#taskText {
+    background: #fff;
+    border: #000013 0.15rem solid;
+    border-radius: 0.2rem;
+    text-align: center;
+    font-family: "Roboto Slab", serif;
+    height: 4rem;
+    width: 7rem;
+    margin: auto 0.8rem auto 0.1rem;
+}
+
+.task p {
+    margin: auto;
 }
