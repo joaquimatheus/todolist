@@ -21,6 +21,12 @@ const js = {
     recover: getUiFiles('js/recover.js')
 }
 
+const css = {
+    home: getUiFiles('css/home.css'),
+    form: getUiFiles('css/formPage.css'),
+    tasks: getUiFiles('css/tasks.css')
+}
+
 const routes = [
     //HTML
     {
@@ -102,6 +108,31 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'application/javascript');
             res.end(js.recover);
+        }
+    },
+    // CSS
+    {
+        url: '/css/home.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.home);
+        }
+    },
+    {
+        url: '/css/form.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.form);
+        }
+    },
+    {
+        url: '/css/tasks.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.tasks);
         }
     }
 ];
