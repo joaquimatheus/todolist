@@ -81,6 +81,37 @@ function validateJwtToken(req, res, next) {
         return;
     }
 
+    const payloadJson = JSON.parse(
+        Buffer.from(payload, 'base64').toString('utf-8')
+    )
+
+    req.userId = payloadJson.userId;
+    next();
+}
+
+async function validateAccountId(req, res, next) {
+    const db = new Database();
+    const accountId = req.headers['account_id'];
+
+    console.log(accountId);
+
+    const userInAccount = await db.knex('users_in_accounts').where({
+        user_id: req.userId,
+        account_id: accountId,
+        role: 'admin'
+    }).first();
+
+    if(!userInAccount) {
+        res.writeHead(401, 'application/json');
+        res.end(JSON.stringify({
+            invalidToken: false,
+            unauthorized: true
+        }))
+
+        return;
+    }
+
+    req.accountId = accountId;
     next();
 }
 
@@ -127,10 +158,16 @@ const routes = [
             const user = await userModel.login(email, password);
             const token = getJwtTokenByUser(user);
 
+            user.accounts = await userModel.getAccounts(user.id);
+
             logger.info(`Logged - ${email}`);
 
             res.writeHead(200, "application/json");
-            res.end(JSON.stringify({ token, ok: true }));
+            res.end(JSON.stringify({ 
+                token, 
+                ok: true,
+                accounts: user.accounts
+            }));
         },
     },
     {
@@ -182,6 +219,78 @@ const routes = [
             res.end(JSON.stringify({ ok: true }));
         },
     },
+    {
+        url: '/tasks',
+        method: 'GET',
+        middlewares: [
+            validateJwtToken,
+            validateAccountId
+        ],
+        handler: async (req, res) => {
+            const db = new Database();
+            const tasks = await db.knex('tasks').where({
+                account_id: req.accountId
+            });
+
+            console.log(req.userId, req.accountId);
+            console.log(tasks);
+
+            res.writeHead(200, 'application/json');
+            res.end(JSON.stringify({ ok: true, tasks }));
+        }
+    },
+    {
+        url: '/tasks',
+        method: 'POST',
+        middlewares: [
+            validateJwtToken,
+            validateAccountId
+        ],
+        handler: async (req, res) => {
+            const { title } = await jsonParse(req);
+            const db = new Database();
+            await db.knex('tasks').insert({
+                account_id: req.accountId,
+                title
+            });
+
+            res.writeHead(200, 'application/json');
+            res.end(JSON.stringify({ ok: true }));
+        }
+    },
+    {
+        url: '/tasks',
+        method: 'DELETE',
+        middlewares: [
+            validateJwtToken,
+            validateAccountId
+        ],
+        handler: async (req, res) => {
+            const db = new Database();
+
+
+            await db.knex('tasks').whare({
+                account_id: req.accountId,
+                id: req.query.id
+            }).del();
+
+            res.writeHead(200, 'application/json');
+            res.end(JSON.stringify({ ok: true }));
+        }
+    },
+    {
+        url: '/user',
+        method: 'GET',
+        middlewares: [ validateJwtToken ],
+        handler: async (req, res) => {
+
+            const userModel = new UserModel(new Database());
+            const user = await userModel.getUserById(req.userId)
+
+            res.writeHead(200, 'application/json');
+            res.end(JSON.stringify({ ok: true, user }))
+        }
+    }
 ];
 
 module.exports = { routes };
