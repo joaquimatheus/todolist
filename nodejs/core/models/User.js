@@ -91,6 +91,27 @@ class UserModel {
             login_token: loginToken
         });
     }
+
+    async getAccounts(userId) {
+        return this.db
+            .knex('accounts as a')
+            .join('users_in_accounts as uia', 'uia.account_id', 'a.id')
+            .where({
+                'uia.user_id': userId
+            }).select('a.*');
+    }
+
+    async tryGetUserById(userId) {
+        const user = await this.db.knex('users').where({ id: userId }).first();
+        return user;
+    }
+
+    async getUserById(userId) {
+        const user = await this.tryGetUserById(userId);
+        if (!user) { throw new Error(`User: ${userId} not found`);}
+
+        return user;
+    }
     
 }
 
