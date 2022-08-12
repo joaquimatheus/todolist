@@ -1,51 +1,49 @@
-window.onload = function () {
-    const domqs = document.querySelector.bind(document);
-    
-    const token = new URLSearchParams(location.search).get("token");
+const token = new URLSearchParams(location.search).get("token");
 
-    async function validateToken() {
-        const url = `http://localhost:5555/login-token?token=${token}`;
+async function validateToken() {
+    const { apiUrl } = window.app.config
 
-        await fetch(url, {
-            mode: "cors",
-            method: "GET",
-        })
-        .then(async (res) => console.log(res))
-        .catch((res) => console.error(res));
+    try {
+        await fetch(`${apiUrl}/login-token?token=${token}`, {
+            mode: 'cors',
+            method: 'GET',
+        });
+    } catch (ex) {
+        console.error(ex);
+
+        location.href = '/login';
+    }
 }
 
-    function bindInputsForm() {
-        domqs("form").addEventListener("submit", (ev) => {
-            ev.preventDefault();
+window.onload = function () {
+    const { domqs, ajaxAdapter } = window.app;
+    validateToken();
 
-            validateToken();
+    domqs("form").addEventListener("submit", async (ev) => {
+        ev.preventDefault();
 
-            let formData = {
-                password: domqs("#password").value,
-                confirmPassword: domqs("#new-password").value,
-                token,
-            };
+        validateToken();
 
-            if (formData.password !== formData.confirmPassword) {
-                alert(`Password don't match`);
-                return;
-            }
+        let formData = {
+            password: domqs("#password").value,
+            confirmPassword: domqs("#new-password").value,
+            token,
+        };
 
-            fetch("http://localhost:5555/set-new-password", {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                method: "POST",
-                body: JSON.stringify(formData),
-            })
-            .then((res) => {
-                console.log(res);
-                alert("Password update!");
-            })
-            .catch((res) => console.error(res));
-        });
-    }
-    bindInputsForm();
-};
+        if (formData.password !== formData.confirmPassword) {
+            alert(`Password don't match`);
+            return;
+        }
+
+        try {
+            await ajaxAdapter('POST', 'set-new-password', formData);
+
+            alert("Password updated!")
+            location.href = '/login'
+        } catch (ex) {
+            console.error(ex);
+            alert(ex.message);
+        }
+    });
+}
+

@@ -1,32 +1,29 @@
 window.onload = function () {
-    const domqs = document.querySelector.bind(document);
+    const { domqs, ajaxAdapter } = window.app;
 
-    function getInputsForm() {
-        domqs("form").addEventListener("submit", (ev) => {
-            ev.preventDefault();
-            let formData = {
-                email: domqs("#email").value,
-                password: domqs("#password").value,
-            };
+    domqs('form').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
 
-            fetch("http://localhost:5555/login", {
-                header: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                method: "POST",
-                body: JSON.stringify(formData),
-            })
-            .then((res) => {
-                console.log(res)
-                location.href = '/tasks';
-            })
-            .catch((res) => {
-                console.error(res);
-            });
-        });
-    }
+        let formData = {
+            email: domqs('#email').value,
+            password: domqs('#password').value
+        }
 
-    getInputsForm();
+        try {
+            const { accounts, token } = await ajaxAdapter(
+                'POST',
+                'login',
+                formData
+           );
+
+            localStorage.setItem('jwt', token);
+            localStorage.setItem('accounts', JSON.stringify(accounts))
+
+            alert('Logged in');
+            location.href = '/tasks';
+        } catch (ex) {
+            console.error(ex);
+            alert(ex.message);
+        }
+    })
 };

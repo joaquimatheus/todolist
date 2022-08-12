@@ -1,29 +1,23 @@
 window.onload = function () {
-    const domqs = document.querySelector.bind(document);
+    const { domqs, ajaxAdapter } = window.app;
 
-    function bindInputsForm() {
-        domqs("form").addEventListener("submit", (ev) => {
-            ev.preventDefault();
+    domqs('form').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
 
-            let formData = {
-                email: domqs("#email").value,
-            };
+        const formData = {
+            email: domqs('#email').value
+        }
 
-            fetch("http://localhost:5555/forget-password", {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                method: "POST",
-                body: JSON.stringify(formData),
-            })
-            .then((res) => {
-                alert("Sending recover password yo your email");
-            })
-            .catch((res) => console.error(res));
-        });
-    }
+        console.log(formData);
 
-    bindInputsForm();
+        try {
+            await ajaxAdapter('POST', 'forget-password', formData);
+
+            alert('Instruction sent to your email');
+            location.href = '/login'
+        } catch (ex) {
+            console.error(ex);
+            alert(ex.message);
+        }
+    })
 };
