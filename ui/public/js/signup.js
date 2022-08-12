@@ -1,32 +1,29 @@
 window.onload = function () {
-    const domqs = document.querySelector.bind(document);
+    const { domqs, ajaxAdapter } = window.app;
 
-    function getInputsForm() {
-        domqs("form").addEventListener("submit", (ev) => {
-            ev.preventDefault();
-            let formData = {
-                name: domqs("#username").value,
-                email: domqs("#email").value,
-                password: domqs("#password").value,
-            };
+    domqs('form').addEventListener('submit', async(ev) => {
+        ev.preventDefault();
 
-            fetch("http://localhost:5555/signup", {
-                header: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                method: "POST",
-                body: JSON.stringify(formData),
-            })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((res) => {
-                console.error(res);
-            });
-        });
-    }
+        let formData = {
+            name: domqs('#username').value,
+            email: domqs('#email').value,
+            password: domqs('#password').value,
+            confirm_password: domqs('#confirm_password').value
+        }
 
-    getInputsForm();
+        if(formData.password != formData.confirm_password) {
+            alert("Passwords don't match ");
+            return;
+        }
+
+        try {
+            const response = await ajaxAdapter('POST', 'signup', formData);
+
+            alert(`User created, your user id is: ${response.userId}`)
+            location.href = '/login'
+        } catch (ex) {
+            console.error(ex);
+            alert(ex.message);
+        }
+    })
 };

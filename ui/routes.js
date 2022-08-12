@@ -11,20 +11,25 @@ const htmls = {
     login: getUiFiles("login.html"),
     tasks: getUiFiles('tasks.html'),
     forget: getUiFiles('forget.html'),
-    recover: getUiFiles('recover.html')
+    recover: getUiFiles('recover.html'),
+    addTask: getUiFiles('addTasks.html')
 };
 
 const js = {
     signup: getUiFiles('js/signup.js'),
     login: getUiFiles('js/login.js'),
     forget: getUiFiles('js/forget.js'),
-    recover: getUiFiles('js/recover.js')
+    recover: getUiFiles('js/recover.js'),
+    app: getUiFiles('/js/app.js'),
+    tasks: getUiFiles('/js/tasks.js'),
+    addTasks: getUiFiles('/js/addTasks.js')
 }
 
 const css = {
     home: getUiFiles('css/home.css'),
     form: getUiFiles('css/formPage.css'),
     tasks: getUiFiles('css/tasks.css')
+
 }
 
 const routes = [
@@ -77,6 +82,14 @@ const routes = [
             res.end(htmls.recover);
         }
     },
+    {
+        url: '/addtask',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.addTask);
+        }
+    },
     // JS
     {
         url: "/js/signup.js",
@@ -110,6 +123,30 @@ const routes = [
             res.end(js.recover);
         }
     },
+    {
+        url: '/js/app.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.app);
+        }
+    },
+    {
+        url: '/js/tasks.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.tasks);
+        }
+    },
+    {
+        url: '/js/addTasks.js',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'application/javascript');
+            res.end(js.addTasks);
+        }
+    },
     // CSS
     {
         url: '/css/home.css',
@@ -134,7 +171,7 @@ const routes = [
             res.writeHead(200, 'text/css');
             res.end(css.tasks);
         }
-    }
+    },
 ];
 
 module.exports = routes;
