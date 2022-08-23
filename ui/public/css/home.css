@@ -1,78 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100;200;400;800&display=swap');
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: #12100E;
 }
 
 body {
-    margin: 0;
-    background-color: #f9f9f9;
+    background-color: #12100E;
 }
 
-.nav-bar {
-    list-style-type:none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+ul {
+    list-style-type: none;
 }
 
-.nav-bar li {
-    float: left;
-}
-
-.nav-bar a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
+a {
     text-decoration: none;
 }
 
-.nav-bar a:hover:not(.active) {
-    background-color: #111;
+li a {
+    color: white;
 }
 
-.active {
-    background-color: #04AA6d;
+.logo {
+    font-size: 20px;
+    color: white;
 }
 
-ul .signup {
-    float: right;
+.logo h2 > span {
+    color: #32DE84;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 1.3em;
+}
+
+a:hover {
+    color: #32DE84;
+}
+
+button {
+    border: none;
+    background-color: #32DE84;
+    padding: 0.7em 1.1em;
+    border-radius: 1.07em;
+    font-weight: bold;
+    font-size: 17px;
+    transition:  .4s;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#sign-in {
+    background-color: #E8E1EF;     
+}
+
+.container {
+    height: 100vh;
+    width: 90vw;
+    padding: 0.5em;
+    margin: 0 auto;
+}
+
+section {
+    padding: 10vh;
 }
 
 .header {
-    background-color: #F1F1F1;
+    align-items: center;
+    justify-content: center;
+}
+
+.head-1 {
+    font-size: 3em;
     text-align: center;
-    padding: 20px;
+    color: rgb(232, 225, 239)
 }
 
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 15px;
+.paragraph-1 {
+    color: rgb(232, 225, 239);
+    font-weight: 250;
+    font-size: 1.5rem;
+    padding: 0.5em;
+    margin: 0 30vh;
+    text-align: center;
+    line-height: 1.3
 }
 
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-@media screen and (max-width: 600px) {
-    .column {
-        width: 100%;
+@media (max-width: 1171px) {
+    .paragraph-1 {
+        margin: 0 10vh;
     }
-}
-
-.column h2 {
-    text-align: center;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 30px;
-}
-
-.column p {
-    font-family: monospace;
-    font-weight: 500;
-    font-size: 20px;
-    margin: 0 20px 20px;
 }
