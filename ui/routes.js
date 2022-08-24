@@ -28,8 +28,16 @@ const js = {
 const css = {
     home: getUiFiles('css/home.css'),
     form: getUiFiles('css/formPage.css'),
-    tasks: getUiFiles('css/tasks.css')
+    tasks: getUiFiles('css/tasks.css'),
+}
 
+const img = {
+    tasks: getUiFiles('img/tasks.svg'),
+    devProductivity: getUiFiles('img/dev_productivity.svg'),
+    onlineOrganizer: getUiFiles('img/online_organizer.svg'),
+    organizationProjects: getUiFiles('img/organization_projects.svg'),
+    timeManagement: getUiFiles('img/time_management.svg'),
+    workTogether: getUiFiles('img/work_together.svg')
 }
 
 const routes = [
@@ -172,6 +180,55 @@ const routes = [
             res.end(css.tasks);
         }
     },
+    // IMG
+    {
+        url: '/img/tasks.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.tasks);
+        }
+    },
+    {
+        url: '/img/dev_productivity.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.devProductivity);
+        }
+    },
+    {
+        url: '/img/online_organizer.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.onlineOrganizer);
+        }
+    },
+    {
+        url: '/img/organization_projects.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.organizationProjects);
+        }
+    },
+    {
+        url: '/img/time_management.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.timeManagement);
+        }
+    },
+    {
+        url: '/img/work_together.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.workTogether);
+        }
+    }
 ];
 
 module.exports = routes;
