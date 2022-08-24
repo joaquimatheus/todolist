@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100;200;400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 
 * {
     margin: 0;
@@ -69,9 +70,7 @@ button:hover {
 }
 
 .container {
-    height: 100vh;
     width: 90vw;
-    padding: 0.5em;
     margin: 0 auto;
 }
 
@@ -104,4 +103,30 @@ section {
     .paragraph-1 {
         margin: 0 10vh;
     }
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+}
+
+article h2 {
+    color: #E8E1EF;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'Oxygen', sans-serif;
+}
+
+article img {
+    display: flex;
+    margin-bottom: 70px;
+}
+
+.showing-head {
+    font-family: 'Oxygen', sans-serif;
+    text-align: center;
+    color: #E8E1EF;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
 }
