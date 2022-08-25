@@ -37,7 +37,8 @@ const img = {
     onlineOrganizer: getUiFiles('img/online_organizer.svg'),
     organizationProjects: getUiFiles('img/organization_projects.svg'),
     timeManagement: getUiFiles('img/time_management.svg'),
-    workTogether: getUiFiles('img/work_together.svg')
+    workTogether: getUiFiles('img/work_together.svg'),
+    iconChecklist: getUiFiles('img/check-list.svg')
 }
 
 const routes = [
@@ -227,6 +228,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, {'Content-Type': 'image/svg+xml' });
             res.end(img.workTogether);
+        }
+    },
+    {
+        url: '/img/check-list.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.iconChecklist);
         }
     }
 ];
