@@ -234,3 +234,19 @@ article img {
 .done {
     color: #80B192;
 }
+
+.col-grid {
+    margin-bottom: 3rem;
+}
+
+.roles {
+    color: #ffd166;
+}
+
+.create {
+    color: #16db65;
+}
+
+.delete {
+    color: #f94144;
+}
