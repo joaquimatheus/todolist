@@ -15,6 +15,10 @@ nav {
     justify-content: space-between;
     padding: 10px 30px;
     background-color: #12100E;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 body {
@@ -249,4 +253,16 @@ article img {
 
 .delete {
     color: #f94144;
+}
+
+.colloborate {
+    color: #4361EE;
+}
+
+.manage {
+    color: #0466C8;
+}
+
+.productivity {
+    color: #ff6b35;
 }
