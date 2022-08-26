@@ -2,11 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
+:root {
+    --primary-color: #12100E;
+    --secondary-color: #E8E1EF;
+    --third-color: #32DE84;
+    --fourth-color: #1A1A1A;
+
+    --warn-color: #FFC107;
+    --error-color: #E63946;
+    --font-fira-sans: 'Fira Sans Extra Condensed', sans-serif;
+    --font-oxygen: 'Oxygen', sans-serif;
+    --font-arimo: 'Arimo', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-family: var(--font-fira-sans)
 }
 
 nav {
@@ -14,7 +27,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 10px 30px;
-    background-color: #12100E;
+    background-color: var(--primary-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -22,11 +35,10 @@ nav {
 }
 
 body {
-    background-color: #12100E;
+    background-color: var(--primary-color);
 }
 
-ul {
-    list-style-type: none;
+ul { list-style-type: none;
 }
 
 a {
@@ -43,7 +55,7 @@ li a {
 }
 
 .logo h2 > span {
-    color: #32DE84;
+    color: var(--third-color);
 }
 
 nav ul li {
@@ -53,12 +65,12 @@ nav ul li {
 }
 
 a:hover {
-    color: #32DE84;
+    color: var(--third-color);
 }
 
 button {
     border: none;
-    background-color: #32DE84;
+    background-color: var(--secondary-color);
     padding: 0.7em 1.1em;
     border-radius: 1.07em;
     font-weight: bold;
@@ -71,7 +83,7 @@ button:hover {
 }
 
 #sign-in {
-    background-color: #E8E1EF;     
+    background-color: var(--third-color);     
 }
 
 .container {
@@ -91,11 +103,11 @@ section {
 .head-1 {
     font-size: 3em;
     text-align: center;
-    color: rgb(232, 225, 239)
+    color: var(--secondary-color)
 }
 
 .paragraph-1 {
-    color: rgb(232, 225, 239);
+    color: var(--secondary-color);
     font-weight: 250;
     font-size: 1.5rem;
     padding: 0.5em;
@@ -119,7 +131,7 @@ article h2 {
     color: #E8E1EF;
     margin-bottom: 40px;
     text-align: center;
-    font-family: 'Oxygen', sans-serif;
+    font-family: var(--font-oxygen);
 }
 
 .todo {
@@ -127,18 +139,18 @@ article h2 {
 }
 
 .list {
-    color: #32DE84;
+    color: var(--third-color);
 }
 
 article h2 span {
-    font-family: 'Oxygen', sans-serif;
-    color: #32DE84;
+    font-family: var(--font-oxygen);
+    color: var(--third-color);
 }
 
 article img {
     display: flex;
     margin-bottom: 70px;
-    background-color: #1A1A1A;
+    background-color: var(--fourth-color);
     padding: 30px;
     border-radius: 12px;
     width: 400px;
@@ -146,9 +158,9 @@ article img {
 }
 
 .showing-head {
-    font-family: 'Oxygen', sans-serif;
+    font-family: var(--font-oxygen);
     text-align: center;
-    color: #E8E1EF;
+    color: var(--secondary-color);
     font-weight: bold;
     font-size: 2.5em;
     margin-bottom: 2.5em;
@@ -160,20 +172,20 @@ article img {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #1A1A1A;
+    background-color: var(--fourth-color);
     border-radius: 2em;
 }
 
 .get-started > h1 {
-    font-family: 'Oxygen', sans-serif;
+    font-family: var(--font-oxygen);
     margin-bottom: 1em;
-    color: #E8E1EF;
+    color: var(--font-oxygen);
     font-size: 2.3em;
     text-align: center;
 }
 
 .get-started > button {
-    font-family: 'Oxygen', sans-serif;
+    font-family: var(--font-oxygen);
     padding: 1em;
     font-size: 1.3em;
     background-color: #A1E887;
@@ -189,7 +201,7 @@ article img {
 }
 
 .get-started button span {
-    font-family: 'Oxygen', sans-serif;
+    font-family: var(--font-oxygen);
     color: #3A86FF;
 }
 
@@ -207,14 +219,14 @@ article img {
 
 .heading-more {
     color: white;
-    font-family: 'Arimo', sans-serif;
+    font-family: var(--font-arimo);
     font-size: 2em;
     line-height: 1.3;
     margin-bottom: 1em;
 }
 
 .heading-more + p {
-    font-family: 'Arimo', sans-serif;
+    font-family: var(--font-arimo);
     font-size: 1.5em;
     font-weight: 400;
 }
