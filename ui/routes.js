@@ -38,7 +38,9 @@ const img = {
     organizationProjects: getUiFiles('img/organization_projects.svg'),
     timeManagement: getUiFiles('img/time_management.svg'),
     workTogether: getUiFiles('img/work_together.svg'),
-    iconChecklist: getUiFiles('img/check-list.svg')
+    iconChecklist: getUiFiles('img/check-list.svg'),
+    teamWork: getUiFiles('img/team_work.svg'),
+    packet: getUiFiles('img/packet.svg'),
 }
 
 const routes = [
@@ -237,7 +239,23 @@ const routes = [
             res.writeHead(200, {'Content-Type': 'image/svg+xml' });
             res.end(img.iconChecklist);
         }
-    }
+    },
+    {
+        url: '/img/team_work.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.teamWork);
+        }
+    },
+    {
+        url: '/img/packet.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.packet);
+        }
+    },
 ];
 
 module.exports = routes;
