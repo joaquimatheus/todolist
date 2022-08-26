@@ -1,26 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100;200;400;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
-:root {
-    --primary-color: #12100E;
-    --secondary-color: #E8E1EF;
-    --third-color: #32DE84;
-    --fourth-color: #1A1A1A;
-
-    --warn-color: #FFC107;
-    --error-color: #E63946;
-    --font-fira-sans: 'Fira Sans Extra Condensed', sans-serif;
-    --font-oxygen: 'Oxygen', sans-serif;
-    --font-arimo: 'Arimo', sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--font-fira-sans)
-}
+@import url('css/root.css');
 
 nav {
     display: flex;
