@@ -21,3 +21,17 @@
     box-sizing: border-box;
     font-family: var(--font-fira-sans)
 }
+
+body {
+    background-color: var(--primary-color);
+}
+
+.container {
+    width: 90vw;
+    margin: 0 auto;
+}
+
+section {
+    padding: 10vh;
+}
+
