@@ -84,7 +84,7 @@ article img {
 .get-started > h1 {
     font-family: var(--font-oxygen);
     margin-bottom: 1em;
-    color: var(--font-oxygen);
+    color: var(--secondary-color);
     font-size: 2.3em;
     text-align: center;
 }
