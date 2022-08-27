@@ -7,6 +7,7 @@ function getUiFiles(name) {
 
 const htmls = {
     index: getUiFiles("index.html"),
+    about: getUiFiles('about.html'),
     signup: getUiFiles("signup.html"),
     login: getUiFiles("login.html"),
     tasks: getUiFiles('tasks.html'),
@@ -26,9 +27,12 @@ const js = {
 }
 
 const css = {
+    root: getUiFiles('css/root.css'),
+    nav: getUiFiles('css/nav.css'),
     home: getUiFiles('css/home.css'),
     form: getUiFiles('css/formPage.css'),
     tasks: getUiFiles('css/tasks.css'),
+    about: getUiFiles('css/about.css'),
 }
 
 const img = {
@@ -51,6 +55,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'text/html');
             res.end(htmls.index);
+        }
+    },
+    {
+        url: '/about',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.about)
         }
     },
     {
@@ -160,6 +172,22 @@ const routes = [
     },
     // CSS
     {
+        url: '/css/root.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.root);
+        }
+    },
+    {
+        url: '/css/nav.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.nav);
+        }
+    },
+    {
         url: '/css/home.css',
         method: 'GET',
         handler: (req, res) => {
@@ -181,6 +209,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'text/css');
             res.end(css.tasks);
+        }
+    },
+    {
+        url: '/css/about.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.about);
         }
     },
     // IMG
