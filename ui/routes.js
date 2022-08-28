@@ -45,6 +45,9 @@ const img = {
     iconChecklist: getUiFiles('img/check-list.svg'),
     teamWork: getUiFiles('img/team_work.svg'),
     packet: getUiFiles('img/packet.svg'),
+    startupLife: getUiFiles('img/startup_life.svg'),
+    startBuilding: getUiFiles('img/start_building.svg'),
+    outerSpace: getUiFiles('img/outer_space.svg')
 }
 
 const routes = [
@@ -290,6 +293,30 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, {'Content-Type': 'image/svg+xml' });
             res.end(img.packet);
+        }
+    },
+    {
+        url: '/img/startup_life.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.startupLife);
+        }
+    },
+    {
+        url: '/img/start_building.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.startBuilding);
+        }
+    },
+    {
+        url: '/img/outer_space.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.outerSpace);
         }
     },
 ];
