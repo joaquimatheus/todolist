@@ -3,44 +3,167 @@
     <head>
         <title>Home</title>
         <meta charset="utf-8" />
+        <link href="/css/root.css" rel="stylesheet">
+        <link href="/css/nav.css" rel="stylesheet">
         <link href="/css/home.css" rel="stylesheet" />
     </head>
     <body>
-        <main>
-            <header>
-                <ul class="nav-bar">
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li class="signup">
-                        <a href="/signup">Sign up</a>
-                    </li>
-                </ul>
-            </header>
+        <header>
+            <nav>
+                <a class="logo" href="#">
+                    <h2>todo<span>list</span></h2>
+                </a>
 
-            <section class="header">
-                <h5>what this app do</h5>
-                <h1>you can create a todo list to be more productive</h1>
+                <div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <button id="sign-in" type="button">Sign in</button>
+                    <button type="button">Sign Up</button>
+                </div>
+            </nav>
+        </header>
+        <main class="">
+            <section id="intro" class="container">
+                <div class="header">
+                    <h1 class="head-1">
+                        Do you can create fast a todo list to be more productive
+                    </h1>
+                    <p class="paragraph-1">
+                        Create your schedules your, way, create teams and
+                        manage, create tasks and share tasks, create tasks for
+                        your company, for your work, for your college AND put
+                        your hands on work!
+                    </p>
+                </div>
             </section>
 
-            <section>
+            <section id="showing-the-product" class="container">
+                <h1 class="showing-head">
+                    Everything you need out of a <span class="todo">todo</span
+                    ><span class="list">list</span>
+                </h1>
                 <div class="row">
-                    <div class="column">
-                        <h2>Productivity</h2>
-                        <p>
-                            Improve your productivity with this handy task
-                            manager. If you never seem to have enough time to
-                            complete your tasks, maybe you need a task manager
-                            like this Application helo!
-                        </p>
+                    <article>
+                        <h2>Make tasks <span>faster</span></h2>
+                        <img src="/img/tasks.svg" />
+                    </article>
+                    <article>
+                        <h2>Be <span>more productive</span></h2>
+                        <img src="/img/dev_productivity.svg" />
+                    </article>
+                    <article>
+                        <h2>Time <span>management</span></h2>
+                        <img src="/img/time_management.svg" />
+                    </article>
+                </div>
+                <div class="row">
+                    <article>
+                        <h2>Organize <span>your projects</span></h2>
+                        <img src="/img/organization_projects.svg" />
+                    </article>
+                    <article>
+                        <h2>Do tasks <span>anywhere</span></h2>
+                        <img src="/img/online_organizer.svg" />
+                    </article>
+                    <article>
+                        <h2>Work <span>together</span></h2>
+                        <img src="/img/work_together.svg" />
+                    </article>
+                </div>
+            </section>
+
+            <section id="get-started">
+                <div class="get-started container">
+                    <h1>
+                        Work more productively and <span>power up</span> your
+                        <span>life</span>
+                    </h1>
+                    <button>Get Started <span>NOW!!</span></button>
+                </div>
+            </section>
+
+            <section id="more-about">
+                <div class="container">
+                    <div class="row-grid" id="show-more">
+                        <div class="col-grid">
+                            <h2 class="heading-more">
+                                Create todolist, just do it, and organize your
+                                tasks the way you want
+                            </h2>
+                            <p>
+                                The <span class="todo">todo</span
+                                ><span class="list">list</span> app uses the
+                                <span id="kanban">Kanban</span> method to
+                                organize your tasks into stages
+                                <span class="todo">todo</span>,
+                                <span class="doing">doing</span> and
+                                <span class="done">done</span>.
+                            </p>
+                        </div>
+                        <div class="col-grid">
+                            <img
+                                class="more-img"
+                                src="img/check-list.svg"
+                                width="300px"
+                                height="300px"
+                            />
+                        </div>
                     </div>
-                    <div class="column">
-                        <h2>Create</h2>
-                        <p>Create your tasks and manage it</p>
+                    <div class="row-grid" id="show-more">
+                        <div class="col-grid">
+                            <img
+                                class="more-img"
+                                src="img/team_work.svg"
+                                width="300px"
+                                height="300px"
+                            />
+                        </div>
+                        <div class="col-grid">
+                            <h2 class="heading-more">
+                                You can manage each task for each person for
+                                your team.
+                            </h2>
+                            <p>
+                                Each person can
+                                <span class="create">create</span> and
+                                <span class="delete">delete</span>
+                                <i>tasks</i> and can also select the
+                                <span class="roles">roles</span> for each member
+                                of their team
+                            </p>
+                        </div>
                     </div>
-                    <div class="column">
-                        <h2>Share</h2>
-                        <p>Share Your Tasks with your teammates</p>
+                    <div class="row-grid" id="show-more">
+                        <div class="col-grid">
+                            <h2 class="heading-more">
+                                Manage your team's projects on the go and switch
+                                projects
+                            </h2>
+                            <p>
+                                <span class="colloborate">Colloborate</span>,
+                                <span class="manage">manage</span> projects and
+                                reach new peaks of
+                                <span class="productivity">productivity!</span>.
+                                from skyscrapers to the home office, the way
+                                your team works is unique. Do it all with
+                                <span class="todo">todo</span
+                                ><span class="list">list</span>
+                            </p>
+                        </div>
+                        <div class="col-grid">
+                            <img
+                                class="more-img"
+                                src="img/packet.svg"
+                                width="300px"
+                                height="300px"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
