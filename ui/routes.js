@@ -8,6 +8,7 @@ function getUiFiles(name) {
 const htmls = {
     index: getUiFiles("index.html"),
     about: getUiFiles('about.html'),
+    faq: getUiFiles('faq.html'),
     signup: getUiFiles("signup.html"),
     login: getUiFiles("login.html"),
     tasks: getUiFiles('tasks.html'),
@@ -33,6 +34,7 @@ const css = {
     form: getUiFiles('css/formPage.css'),
     tasks: getUiFiles('css/tasks.css'),
     about: getUiFiles('css/about.css'),
+    faq: getUiFiles('css/faq.css')
 }
 
 const img = {
@@ -65,7 +67,15 @@ const routes = [
         method: 'GET',
         handler: (req, res) => {
             res.writeHead(200, 'text/html');
-            res.end(htmls.about)
+            res.end(htmls.about);
+        }
+    },
+    {
+        url: '/faq',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/html');
+            res.end(htmls.faq);
         }
     },
     {
@@ -196,6 +206,14 @@ const routes = [
         handler: (req, res) => {
             res.writeHead(200, 'text/css');
             res.end(css.home);
+        }
+    },
+    {
+        url: '/css/faq.css',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, 'text/css');
+            res.end(css.faq);
         }
     },
     {
