@@ -40,3 +40,6 @@ section {
     padding: 10vh;
 }
 
+.active {
+    color: var(--third-color);
+}
