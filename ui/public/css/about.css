@@ -36,14 +36,6 @@ section {
     color: var(--third-color);
 }
 
-.box {
-    background-color: var(--fourth-color);
-    padding: 1.8em;
-    border-radius: 1.6em;
-    margin: 0 auto;
-    width: 65%;
-}
-
 .box > h1 {
     font-family: var(--font-arimo);
     font-size: 2.5em;
