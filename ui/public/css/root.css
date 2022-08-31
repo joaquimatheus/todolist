@@ -40,3 +40,22 @@ section {
     padding: 10vh;
 }
 
+.active {
+    color: var(--third-color);
+}
+
+.box {
+    background-color: var(--fourth-color);
+    padding: 1.8em;
+    border-radius: 1.6em;
+    margin: 0 auto;
+    width: 65%;
+}
+
+.box-larger {
+    background-color: var(--fourth-color);
+    padding: 1.8em;
+    border-radius: 1.6em;
+    margin: 0 auto;
+    width: 75%;
+}
