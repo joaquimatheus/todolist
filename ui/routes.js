@@ -49,7 +49,9 @@ const img = {
     packet: getUiFiles('img/packet.svg'),
     startupLife: getUiFiles('img/startup_life.svg'),
     startBuilding: getUiFiles('img/start_building.svg'),
-    outerSpace: getUiFiles('img/outer_space.svg')
+    outerSpace: getUiFiles('img/outer_space.svg'),
+    questionIcon: getUiFiles('img/question.svg'),
+    answerIcon: getUiFiles('img/answer.svg')
 }
 
 const routes = [
@@ -336,6 +338,22 @@ const routes = [
             res.writeHead(200, {'Content-Type': 'image/svg+xml' });
             res.end(img.outerSpace);
         }
+    },
+    {
+        url: '/img/faq_question.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.questionIcon);
+        }
+    },
+    {
+        url: '/img/faq_answer.svg',
+        method: 'GET',
+        handler: (req, res) => {
+            res.writeHead(200, {'Content-Type': 'image/svg+xml' });
+            res.end(img.answerIcon);
+        }   
     },
 ];
 
