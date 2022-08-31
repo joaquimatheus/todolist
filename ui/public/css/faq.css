@@ -1,9 +1,12 @@
 @import url('css/root.css');
 
+section {
+    padding: 7vh;
+}
+
 #intro {
     padding-top: 20vh;
 }
-
 
 .header-intro {
     align-items: center;
@@ -11,10 +14,6 @@
     font-size: 3em;
     text-align: center;
     color: var(--secondary-color);
-}
-
-#faq {
-    padding: 7vh;
 }
 
 .faq-header {
@@ -40,8 +39,10 @@
     margin: 20px;
 }
 
-.faq-question h2 {
+.faq-question p {
     font-family: var(--font-arimo);
+    font-size: 1.3em;
+    padding: 0.6em 0.6em 0.6em 0.3em;
 }
 
 .faq-asnwer {
@@ -49,8 +50,10 @@
     align-items: center;
 }
 
-.faq-asnwer h2 {
+.faq-asnwer p {
     font-family: var(--font-arimo);
+    font-size: 1.3em;
+    padding: 0.6em 0.6em 0.3em 0.3em;
 }
 
 .faq-asnwer img {
