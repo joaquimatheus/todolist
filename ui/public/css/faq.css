@@ -1,0 +1,64 @@
+@import url('css/root.css');
+
+#intro {
+    padding-top: 20vh;
+}
+
+
+.header-intro {
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+#faq {
+    padding: 7vh;
+}
+
+.faq-header {
+    font-size: 2.5em;
+    padding: 0.5em;
+    font-family: var(--font-oxygen);
+}
+
+.faq-box {
+    border: 4px solid #333533;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+}
+
+.faq-question img {
+    width: 70px;
+    height: 70px;
+    margin: 20px;
+}
+
+.faq-question h2 {
+    font-family: var(--font-arimo);
+}
+
+.faq-asnwer {
+    display: flex;
+    align-items: center;
+}
+
+.faq-asnwer h2 {
+    font-family: var(--font-arimo);
+}
+
+.faq-asnwer img {
+    width: 70px;
+    height: 70px;
+    margin: 20px;
+}
+
+.faq-diviser {
+    margin-top: 20px;
+}
